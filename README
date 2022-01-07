@@ -1,0 +1,29 @@
+     for CREATE [METHOD POST]
+        Request URl=/api(?name&surname&username)
+        example /api?name=Hayk&surname=Vardanyan&usernamehvardanyan
+        Response USERNAME and USERID   (save your USERID)
+
+
+
+     for READ [METHOD GET]
+          Request URl=/api/[your USERID]
+          example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a
+          Request URl=/api/[your USERID]/[json or xml]
+          example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a/json
+          Response xml/json data
+
+
+
+     for UPDATE [METHOD PUT]
+          Request URl=/api/[your USERID](?name&surname&username)
+          example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a?name=Tigran
+          Request URl=/api/[your USERID]/[json or xml](?name&surname&username)
+          example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a/json?name=Tigran
+          Response xml/json updated data
+
+
+
+     for DELETE [METHOD DELETE]
+          Request URl=/api/[your USERID]
+          example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a
+          Response text
