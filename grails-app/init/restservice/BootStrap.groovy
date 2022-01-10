@@ -6,7 +6,7 @@ class BootStrap {
 
 
         100.times {
-            new Employee(name: "Hs",surname: "Va",username: "M",userID: "AAA").save()
+            new Employee(name: "name${(char) (it + 600)}", surname: "Va", username: "${it}M", userID: "AAA").save()
         }
 
     }

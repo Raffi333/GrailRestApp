@@ -4,14 +4,12 @@ package restservice
 import grails.converters.JSON
 import grails.converters.XML
 import grails.gorm.transactions.Transactional
-import groovy.json.JsonOutput
 
 @Transactional(readOnly = true)
 class EmployeeController {
 
 
     def readAll() {
-        long s = System.currentTimeMillis()
 
         def list = Employee.list()
 
