@@ -1,17 +1,18 @@
 package restservice
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils
-import grails.converters.*
-import grails.gorm.transactions.Transactional
 
-import javax.servlet.http.HttpServletRequest
+import grails.converters.JSON
+import grails.converters.XML
+import grails.gorm.transactions.Transactional
+import groovy.json.JsonOutput
 
 @Transactional(readOnly = true)
 class EmployeeController {
 
 
     def readAll() {
+        long s = System.currentTimeMillis()
+
         def list = Employee.list()
 
         list.each { it.userID = "***" }
@@ -19,14 +20,30 @@ class EmployeeController {
         if (list) {
             withFormat {
 
+                //build  xml object
+//                xml {
+//                    render(contentType: "text/xml") {
+//                        AllEmployee() {
+//                            for (l in list) {
+//                                employee(id: l.id) {
+//                                    name(name: l.name)
+//                                    surname(surname: l.surname)
+//                                    username(username: l.username)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+
+                //auto build xml object
                 xml {
                     render list as XML
                 }
-
                 json {
                     def jsonify = list as JSON
                     jsonify.prettyPrint = true
                     render jsonify
+//                    render (['success':'ok',data:list] as JSON)
                 }
                 text {
                     StringBuilder stringBuilder = new StringBuilder("")
@@ -44,6 +61,14 @@ class EmployeeController {
                     }
                 }
             }
+
+            //client test
+//            def url = new URL("http://localhost:8080/api/1_5e5a2dc4-cda1-41cf-be94-583472c77408")
+//            def conn = url.openConnection()
+//            conn.addRequestProperty("accept","application/json")
+//            def artist=conn.content
+//            println "Artist Name = ${artist}"
+
         } else response.sendError 404
     }
 
