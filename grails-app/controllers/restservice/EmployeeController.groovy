@@ -1,6 +1,7 @@
 package restservice
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils
 import grails.converters.*
 import grails.gorm.transactions.Transactional
 
@@ -10,25 +11,37 @@ import javax.servlet.http.HttpServletRequest
 class EmployeeController {
 
 
-
-
-
-
     def readAll() {
         def list = Employee.list()
 
-        list.each {it.userID="***"}
+        list.each { it.userID = "***" }
 
-        println list
         if (list) {
             withFormat {
+
                 xml {
                     render list as XML
                 }
+
                 json {
                     def jsonify = list as JSON
                     jsonify.prettyPrint = true
                     render jsonify
+                }
+                text {
+                    StringBuilder stringBuilder = new StringBuilder("")
+                    list.each {
+                        stringBuilder.append("  NAME-> " + it.name)
+                        stringBuilder.append(":  SURNAME-> " + it.surname)
+                        stringBuilder.append(":  USERNAME-> " + it.username)
+                        stringBuilder.append("<br>")
+                    }
+                    render(stringBuilder.toString())
+                }
+                html {
+                    render {
+                        list.each { H3(it, ["style": "font-family:Monospace"]) }
+                    }
                 }
             }
         } else response.sendError 404

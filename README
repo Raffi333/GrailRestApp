@@ -27,3 +27,11 @@
           Request URl=/api/[your USERID]
           example /api/820_ddb5121d-b3b3-46f5-bc7b-90ccd7dc33a
           Response text
+
+
+
+
+    Read All data
+          Request URl=/api/all/[json or xml or text or html]
+          example /api/all/json
+          Response json or xml or text or html
