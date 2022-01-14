@@ -10,6 +10,7 @@ class EmployeeController {
 
 
     def readAll() {
+    print 1
 
         def list = Employee.list()
 
